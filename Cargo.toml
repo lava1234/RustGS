@@ -9,3 +9,5 @@ edition = "2018"
 [dependencies]
 byte = "0.2.4"
 enum_primitive = "0.1.1"
+dotenv = "*"
+mysql="*"
