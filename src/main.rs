@@ -19,7 +19,8 @@ fn main() {
             Ok(stream) => {
                 let pool_clone = conn_pool.clone();
                 std::thread::spawn(move || {
-                    client_handler::handle_client(stream, pool_clone.get_conn().unwrap()).unwrap_or_else(|err| eprintln!("{:?}", err))
+                    let mut conn = pool_clone.get_conn().unwrap();
+                    client_handler::handle_client(stream, &mut conn).unwrap_or_else(|err| eprintln!("{:?}", err))
                 });
             }
         }
