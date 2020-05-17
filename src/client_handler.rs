@@ -5,6 +5,7 @@ use crate::enum_primitive::*;
 use byte::*;
 use mysql::PooledConn;
 use crate::database;
+use crate::logic;
 // use database;
 
 const MAX_BUFFER_SIZE: usize = 512;
@@ -29,7 +30,7 @@ fn handle_command(opcode: u16, buffer_data: &[u8], mut conn: &mut PooledConn){
             println!("PONG");
         }
         Some(enums::client_enums::ClientOpcode::FIGHT_REQUEST) => {
-            println!("FIGHT REQ");
+            logic::fight::parse_fighters(buffer_data);
         }
         Some(enums::client_enums::ClientOpcode::MOVE_REQUEST) => {
             println!("MOVE REQ");
@@ -47,7 +48,6 @@ fn handle_command(opcode: u16, buffer_data: &[u8], mut conn: &mut PooledConn){
 }
 
 fn create_account(buffer_data: &[u8], conn: &mut PooledConn){
-    // TODO EXTRACT USERNAME AND PASS FROM BUFFER
     println!("creating acc");
     let name_size: usize = usize::from(buffer_data[0]) + 1;
     let username = std::str::from_utf8(&buffer_data[1..name_size]).unwrap();

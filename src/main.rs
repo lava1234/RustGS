@@ -3,6 +3,9 @@ extern crate byte;
 use std::net::TcpListener;
 pub mod enums;
 pub mod database;
+pub mod models;
+pub mod logic;
+pub mod utils;
 mod client_handler;
 use mysql::Pool;
 

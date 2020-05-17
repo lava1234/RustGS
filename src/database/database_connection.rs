@@ -14,7 +14,3 @@ pub fn create_account(username: &str, password: &str, conn: &mut PooledConn){
         Err(err) => println!("{:?}", err)
     };
 }
-
-pub fn create_fight(){
-    
-}
