@@ -1,4 +1,5 @@
 extern crate byte;
+extern crate rand;
 #[macro_use] extern crate enum_primitive;
 use std::net::TcpListener;
 pub mod enums;
